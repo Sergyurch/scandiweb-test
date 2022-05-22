@@ -1,6 +1,6 @@
 <?php
 
-const DB_HOST = 'localhost';
-const DB_NAME = 'scandiweb';
-const DB_USER = 'root';
-const DB_PASS = 'root';
+const DB_HOST = 'us-cdbr-east-05.cleardb.net';
+const DB_NAME = 'heroku_fc9c303f7541bf6';
+const DB_USER = 'b8628147521806';
+const DB_PASS = 'bebebc13';
