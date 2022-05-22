@@ -3,8 +3,8 @@
         border-secondary">
         <div class="fs-2">Product Add</div>
         <div>
-            <button type="submit" form="product_form" class="btn btn-primary me-3 shadow">SAVE</button>
-            <a href="/" class="btn btn-primary shadow">CANCEL</a>
+            <button type="submit" form="product_form" class="btn btn-primary me-3 shadow">Save</button>
+            <a href="/" class="btn btn-primary shadow">Cancel</a>
         </div>
     </header>
 <?php $headerBlock = ob_get_clean(); ?>
