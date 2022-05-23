@@ -29,8 +29,7 @@
             <div class="row mb-3">
                 <label for="price" class="col-sm-3 col-md-2 col-form-label">Price ($)</label>
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <input type="number" id="price" name="price" class="form-control checkValidity"
-                           placeholder="e.g. 1.23">
+                    <input type="number" id="price" name="price" class="form-control checkValidity">
                     <div class="invalid-feedback" id="priceError"></div>
                 </div>
             </div>

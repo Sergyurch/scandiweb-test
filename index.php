@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+
 use Core\Router;
 use Core\Dispatcher;
 use Core\View;

@@ -75,6 +75,9 @@ function validate(field)
     switch (field.id) {
         case 'sku':
             checkForPresence(field);
+            if (isValid(field)) {
+                checkForUniqueness('sku', field);
+            }
             break;
         case 'name':
             checkForPresence(field);
@@ -82,7 +85,7 @@ function validate(field)
         case 'price':
             checkForPresence(field);
             if (isValid(field)) {
-                checkByPattern(field, /^((0\.)|([^0]\d*\.))\d{2}$/);
+                checkByPattern(field, /^((0(\.\d{1,2})?)|([1-9]\d*(\.\d{1,2})?))$/);
             }
             break;
         case 'weight':
@@ -107,7 +110,7 @@ function checkForPresence(field)
 {
     field.classList.add('was-validated');
 
-    if (field.value == '') {
+    if (field.value === '') {
         field.classList.remove('is-valid');
         field.classList.add('is-invalid');
         document.getElementById(field.id + 'Error').innerText = 'Please, submit required data.';
@@ -124,6 +127,35 @@ function checkByPattern(field, pattern)
         field.classList.add('is-invalid');
         document.getElementById(field.id + 'Error').innerText = 'Please, provide the data of indicated type.';
     }
+}
+
+function checkForUniqueness(columnName, field)
+{
+    let data = {
+        columnName: columnName,
+        value: field.value
+    };
+
+    fetch('/add-product', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+    })
+    .then(data => {
+        if (data === '1') {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            document.getElementById(field.id + 'Error').innerText =
+                `Product with this ${field.name} is already exists.`;
+        }
+    });
 }
 
 function isValid(field)

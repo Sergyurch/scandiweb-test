@@ -20,6 +20,13 @@ class ProductController extends Controller
 
     public function add(): void
     {
+        $data = file_get_contents('php://input');
+
+        if (!empty($data) && empty($_POST)) {
+            $this->isValueExists($data);
+            return;
+        }
+
         if (!empty($_POST)) {
             Product::createFromArray($_POST);
             header('Location: /');
@@ -40,5 +47,18 @@ class ProductController extends Controller
 
         header('Location: /');
         exit();
+    }
+
+    private function isValueExists($data): void
+    {
+        $data = json_decode($data);
+        $columnName = $data->columnName;
+        $value = $data->value;
+
+        if (Product::findOneByColumn($columnName, $value)) {
+            echo 1;
+        } else {
+            echo 0;
+        }
     }
 }
